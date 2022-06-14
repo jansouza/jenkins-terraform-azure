@@ -1,0 +1,43 @@
+jenkins:
+  securityRealm:
+    local:
+      allowsSignup: false
+      users:
+       - id: ${JENKINS_ADMIN_ID}
+         password: ${JENKINS_ADMIN_PASSWORD}
+  authorizationStrategy:
+    globalMatrix:
+      permissions:
+        - "USER:Overall/Administer:${JENKINS_ADMIN_ID}"
+        - "GROUP:Overall/Read:authenticated"
+  remotingSecurity:
+    enabled: true
+  numExecutors: 0
+  nodes:
+  - permanent:
+      launcher:
+        ssh:
+          credentialsId: "jenkins-agent"
+          host: "jenkins-agent-terraform"
+          javaPath: "/opt/java/openjdk/bin/java"
+          port: 22
+          sshHostKeyVerificationStrategy: "nonVerifyingKeyVerificationStrategy"
+      mode: EXCLUSIVE
+      name: "jenkins-agent-terraform"
+      labelString: "jenkins-agent-terraform agent-terraform terraform-agent"
+      numExecutors: 3
+      remoteFS: "/home/jenkins/agent"
+      retentionStrategy: "always"
+
+security:
+  queueItemAuthenticator:
+    authenticators:
+    - global:
+        strategy: triggeringUsersAuthorizationStrategy
+tool:
+  git:
+    installations:
+    - home: "git"
+      name: "Default"
+
+unclassified:

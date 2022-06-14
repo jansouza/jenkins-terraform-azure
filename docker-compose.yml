@@ -1,0 +1,39 @@
+version: '3.2'
+
+services:
+
+  jenkins-master:
+    build:
+      context: jenkins-master/
+    container_name: jenkins-master
+    environment:
+      - JENKINS_ADMIN_ID=admin
+      - JENKINS_ADMIN_PASSWORD=${JENKINS_ADMIN_PASSWORD}
+    privileged: true
+    user: root
+    volumes:
+      - jenkins_data:/var/jenkins_home
+    networks:
+      - iac-network
+    ports:
+      - 8080:8080
+      - 50000:50000
+    restart: unless-stopped
+
+  jenkins-agent-terraform:
+    build:
+      context: jenkins-agent-terraform/
+    container_name: jenkins-agent-terraform
+    networks:
+      - iac-network
+    expose:
+      - 22
+    restart: unless-stopped
+    environment:
+      - JENKINS_AGENT_SSH_PUBKEY=${JENKINS_AGENT_SSH_PUBKEY}
+
+networks:
+  iac-network:
+
+volumes:
+  jenkins_data:
