@@ -10,7 +10,6 @@ Docker
   mkdir .ssh
   ssh-keygen -b 2048 -t rsa -N '' -f .ssh/jenkins_agent
 
-
   # Set Public Key
   JENKINS_AGENT_SSH_PUBKEY=$(cat .ssh/jenkins_agent.pub)
   echo "JENKINS_AGENT_SSH_PUBKEY=$JENKINS_AGENT_SSH_PUBKEY" > .env
