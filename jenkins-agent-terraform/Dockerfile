@@ -9,6 +9,7 @@ RUN apt-get update && \
     gnupg \
     lsb-release \
     wget \
+    curl \
     git
 
 RUN wget -qO - terraform.gpg https://apt.releases.hashicorp.com/gpg | gpg --dearmor -o /usr/share/keyrings/terraform-archive-keyring.gpg
@@ -18,3 +19,6 @@ RUN echo \
 
 RUN apt-get update && \
     apt-get -y install terraform
+
+# Install Azure cli
+RUN curl -sL https://aka.ms/InstallAzureCLIDeb | bash

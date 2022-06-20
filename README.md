@@ -41,14 +41,3 @@ Docker
   Private key
     Add (Paste private key)
   ```
-
-  ##### 2. - Create Jenkins GitHub(Kyndryl) Credentials
-  ```
-  Manage Jenkins -> Manage Credentials -> Add Credentials
-
-  Kind: SSH Username with private key
-  ID: ci-key
-  Username: jangs
-  Private key
-    Add (Paste private key)
-  ```
