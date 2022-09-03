@@ -26,3 +26,4 @@ prometheus:latest
 job-dsl:latest
 docker-workflow:latest
 oic-auth:latest
+ansicolor
