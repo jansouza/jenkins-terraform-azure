@@ -22,3 +22,6 @@ RUN apt-get update && \
 
 # Install Azure cli
 RUN curl -sL https://aka.ms/InstallAzureCLIDeb | bash
+
+# Install tfsec
+RUN curl -s https://raw.githubusercontent.com/aquasecurity/tfsec/master/scripts/install_linux.sh | bash
